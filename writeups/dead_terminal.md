@@ -138,37 +138,86 @@ The loop runs eight times (`k` = 7, 10, 13, …, 28) and stops when `k` reaches 
 
 ## 5. Solution
 
-A small C program was used to extract the equation for each position from the constants in the decompiled function:
+A small C program extracts the equation for each position from the constants in the decompiled function, inverts it, and prints the resulting key:
 
 ```c
-char local_18[8] = { '\x7f', 'y', 'x', -0x76, -0x7e, -0x72, '7', '4' };
-char *pcVar3 = local_18;
-char cVar4 = '\a';
-do {
-    printf("%#x = (X ^ 0x2a) + %#x\n", *pcVar3, cVar4);
-    cVar4 = cVar4 + '\x03';
-    pcVar3 = pcVar3 + 1;
-} while (cVar4 != '\x1f');
+int main(void)
+{
+    char expected[8] = { '\x7f', 'y', 'x', -0x76, -0x7e, -0x72, '7', '4' };
+    char *p = expected;
+    char k = '\a';
+    unsigned char r[8];
+    int pos = 0;
+
+    do {
+        printf("%#x = (X ^ 0x2a) + %#x\n", *p, k);
+        printf("\tX = ((%#x - %#x) ^ 0x2a) & 0xFF\n", *p, k);
+
+        r[pos] = (((*p - k) ^ 0x2a) & 0xFF);
+
+        printf("\tX = %#x -> %c\n\n", r[pos], r[pos]);
+
+        k = k + '\x03';
+        p = p + 1;
+
+        pos += 1;
+    } while (k != '\x1f');
+
+    printf("String: ");
+    for (int i = 0; i < 8; i++){
+            printf("%c", r[i]);
+    };
+    printf("\n");
+
+    return 0;
+}
 ```
 
-```
-0x7f = (X ^ 0x2a) + 0x7
-0x79 = (X ^ 0x2a) + 0xa
-0x78 = (X ^ 0x2a) + 0xd
-0xffffff8a = (X ^ 0x2a) + 0x10
-0xffffff82 = (X ^ 0x2a) + 0x13
-0xffffff8e = (X ^ 0x2a) + 0x16
-0x37 = (X ^ 0x2a) + 0x19
-0x34 = (X ^ 0x2a) + 0x1c
-```
-
-Bytes above `0x7f` are printed sign-extended (`0xffffff8a`), so only the low byte is relevant. Each equation can be inverted independently:
+Each equation is inverted independently. Bytes above `0x7f` are sign-extended when printed (`0xffffff8a`), which is why the result is masked with `0xFF`:
 
 ```
 key[i] = ((expected[i] - k_i) & 0xff) ^ 0x2a
-
-0x7f = (X ^ 0x2a) + 0x7   →   X = (0x7f - 0x7) ^ 0x2a = 0x78 ^ 0x2a = 0x52   ('R')
 ```
+
+Output:
+
+```
+0x7f = (X ^ 0x2a) + 0x7
+	X = ((0x7f - 0x7) ^ 0x2a) & 0xFF
+	X = 0x52 -> R
+
+0x79 = (X ^ 0x2a) + 0xa
+	X = ((0x79 - 0xa) ^ 0x2a) & 0xFF
+	X = 0x45 -> E
+
+0x78 = (X ^ 0x2a) + 0xd
+	X = ((0x78 - 0xd) ^ 0x2a) & 0xFF
+	X = 0x41 -> A
+
+0xffffff8a = (X ^ 0x2a) + 0x10
+	X = ((0xffffff8a - 0x10) ^ 0x2a) & 0xFF
+	X = 0x50 -> P
+
+0xffffff82 = (X ^ 0x2a) + 0x13
+	X = ((0xffffff82 - 0x13) ^ 0x2a) & 0xFF
+	X = 0x45 -> E
+
+0xffffff8e = (X ^ 0x2a) + 0x16
+	X = ((0xffffff8e - 0x16) ^ 0x2a) & 0xFF
+	X = 0x52 -> R
+
+0x37 = (X ^ 0x2a) + 0x19
+	X = ((0x37 - 0x19) ^ 0x2a) & 0xFF
+	X = 0x34 -> 4
+
+0x34 = (X ^ 0x2a) + 0x1c
+	X = ((0x34 - 0x1c) ^ 0x2a) & 0xFF
+	X = 0x32 -> 2
+
+String: REAPER42
+```
+
+The program is also available in the [`src` folder](../src/dead_terminal/equations.c). The results can be summarised as:
 
 | i | expected | k | expected − k | ^ 0x2a | Char |
 |---|----------|------|------|------|------|

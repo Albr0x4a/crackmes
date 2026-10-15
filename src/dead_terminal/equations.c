@@ -15,12 +15,28 @@ int main(void)
     char expected[8] = { '\x7f', 'y', 'x', -0x76, -0x7e, -0x72, '7', '4' };
     char *p = expected;
     char k = '\a';
+    unsigned char r[8];
+    int pos = 0;
 
     do {
         printf("%#x = (X ^ 0x2a) + %#x\n", *p, k);
+	printf("\tX = ((%#x - %#x) ^ 0x2a) & 0xFF\n", *p, k);
+
+	r[pos] = (((*p - k) ^ 0x2a) & 0xFF);
+
+	printf("\tX = %#x -> %c\n\n", r[pos], r[pos]);
+
         k = k + '\x03';
         p = p + 1;
+
+	pos += 1;
     } while (k != '\x1f');
+
+    printf("String: ");
+    for (int i = 0; i < 8; i++){
+	    printf("%c", r[i]);
+    };
+    printf("\n");
 
     return 0;
 }
