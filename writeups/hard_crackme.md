@@ -6,6 +6,7 @@
 | **Tools** | Ghidra, GDB, C, qalc |
 | **Goal** | Produce a valid 24-hex-character sigil for a given name |
 | **Example** | name `asdfg` → sigil `799c1837cc2b3372d8eba7e6` |
+| **Code** | [`src/hard_crackme/keygen.c`](../src/hard_crackme/keygen.c) |
 
 ## 1. Overview
 

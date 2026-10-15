@@ -8,12 +8,12 @@ These are learning exercises, not professional research. They are shared to show
 
 ## Writeups
 
-| Crackme | Platform | Techniques | Source |
-|---|---|---|---|
-| [Dead Terminal](writeups/dead_terminal.md) | Linux x86-64 ELF | Anti-debugging bypass, command parsing, byte-wise key validation inverted with a C helper | [crackmes.one](https://crackmes.one/crackme/6a77c5d1df981859694944b8) |
-| [Hard Crackme (Sigil Forging Ritual)](writeups/hard_crackme.md) | Linux x86-64 ELF | `ptrace` anti-debugging bypass, custom hash reimplemented in C, keygen | Not available |
-| [off-by-one](writeups/off_by_one.md) | Linux x86-64 ELF (raw syscalls, no libc) | Pure dynamic analysis in GDB, syscall tracing, character-by-character comparison | [crackmes.one](https://crackmes.one/crackme/68692100aadb6eeafb398fd3) |
-| [Orbit Fold](writeups/orbit_fold.md) | Linux x86-64 ELF (PIE) | Decompiler output analysis, lookup tables dumped in GDB, manual inversion of byte operations, C solver | [crackmes.one](https://crackmes.one/crackme/6ab1e2bf5c861323b6300702) |
+| Crackme | Platform | Techniques | Code | Source |
+|---|---|---|---|---|
+| [Dead Terminal](writeups/dead_terminal.md) | Linux x86-64 ELF | Anti-debugging bypass, command parsing, byte-wise key validation inverted with a C helper | [equations.c](src/dead_terminal/equations.c) | [crackmes.one](https://crackmes.one/crackme/6a77c5d1df981859694944b8) |
+| [Hard Crackme (Sigil Forging Ritual)](writeups/hard_crackme.md) | Linux x86-64 ELF | `ptrace` anti-debugging bypass, custom hash reimplemented in C, keygen | [keygen.c](src/hard_crackme/keygen.c) | Not available |
+| [off-by-one](writeups/off_by_one.md) | Linux x86-64 ELF (raw syscalls, no libc) | Pure dynamic analysis in GDB, syscall tracing, character-by-character comparison | None (GDB only) | [crackmes.one](https://crackmes.one/crackme/68692100aadb6eeafb398fd3) |
+| [Orbit Fold](writeups/orbit_fold.md) | Linux x86-64 ELF (PIE) | Decompiler output analysis, lookup tables dumped in GDB, manual inversion of byte operations, C solver | [solver.c](src/orbit_fold/solver.c) | [crackmes.one](https://crackmes.one/crackme/6ab1e2bf5c861323b6300702) |
 
 ## Approach
 
@@ -33,4 +33,4 @@ These are learning exercises, not professional research. They are shared to show
 
 ## Author
 
-Alberto Pérez — [LinkedIn](http://www.linkedin.com/in/alberto-p%C3%A9rez-3104252b9)
+Alberto Pérez — [GitHub](https://github.com/Albr0x4a) · [LinkedIn](http://www.linkedin.com/in/alberto-p%C3%A9rez-3104252b9)

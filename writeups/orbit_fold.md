@@ -7,6 +7,7 @@
 | **Tools** | Ghidra, GDB, C, qalc |
 | **Goal** | Recover the accepted flag |
 | **Flag** | `CMO{orbit_folded_twice}` |
+| **Code** | [`src/orbit_fold/solver.c`](../src/orbit_fold/solver.c) |
 
 ## 1. Overview
 

@@ -7,6 +7,7 @@
 | **Tools** | GDB |
 | **Goal** | Find the accepted passphrase |
 | **Passphrase** | `DXUPWYfU` |
+| **Code** | None (solved entirely with GDB) |
 
 ## 1. Overview
 

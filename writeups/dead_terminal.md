@@ -7,6 +7,7 @@
 | **Tools** | Ghidra, GDB, C |
 | **Goal** | Find the key accepted by the `reap <key>` command |
 | **Key** | `REAPER42` |
+| **Code** | [`src/dead_terminal/equations.c`](../src/dead_terminal/equations.c) |
 
 ## 1. Overview
 
