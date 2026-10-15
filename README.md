@@ -33,4 +33,4 @@ These are learning exercises, not professional research. They are shared to show
 
 ## Author
 
-Alberto Pérez — [GitHub](https://github.com/Albr0x4a) · [LinkedIn](http://www.linkedin.com/in/alberto-p%C3%A9rez-3104252b9)
+Alberto Pérez — [LinkedIn](http://www.linkedin.com/in/alberto-p%C3%A9rez-3104252b9)
